@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Component Scan 扫描指定包中的注解 -->
+    <context:component-scan base-package="org.apachecn.springmvc.hello.controller"/>
+
+    <!-- Annotation Driven 开启注解 -->
+    <mvc:annotation-driven/>
+
+    <!-- Static Resource 静态资源的范文（js,css,img ...）-->
+    <mvc:default-servlet-handler/>
+
+    <!-- View Resolver 视图解析器 -->
+    <!-- 关于 Controller 如何找到视图文件, 这里需要详细的说明. 在 Controller 的一个方法中, 返回的字符串定义了所需访问的 jsp 的名字（如上面的index）.
+         在 jspViewResolver 中, 有两个属性, 一个是 prefix, 定义了所需访问的文件路径前缀, 另一是suffix, 表示要访问的文件的后缀, 这里为 .jsp.
+         那么, 如果返回字符串是 xxx , SpringMVC 就会找到 /WEB-INF/pages/xxx.jsp 文件. -->
+    <!-- 用于支持 Servlet,JSP 视图解析-->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
